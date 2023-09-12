@@ -2,7 +2,6 @@
 import express from "express";
 import cors from "cors";
 import cookieSession from "cookie-session";
-import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import http from "http";
 import { Socket, Server } from "socket.io";
@@ -11,20 +10,11 @@ import routes from "./routes";
 import Model from "./models";
 import { MessageItemType } from "./utils";
 
-// Load environment variables from .env file
-dotenv.config({
-    path: process.env.NODE_ENV === "production" ? ".env.prod" : ".env.dev",
-});
-
 // Create an instance of the Express app
 const app = express();
 
 // Configure the public holder (draft)
 app.use(express.static(__dirname + "/public"));
-
-// Extract API URL and version from environment variables
-const { API_URL, API_VER, PORT } = process.env;
-console.log({ API_URL }, { API_VER });
 
 // Configure CORS options to only allow requests from the specified origin
 const corsOptions = {
@@ -107,6 +97,8 @@ io.on("connection", async (socket: Socket) => {
 });
 
 // Start the server listening on the specified port number
+// set port, listen for requests
+const PORT = process.env.NODE_DOCKER_PORT || 8080;
 server.listen(PORT, () => {
     console.log(`Chat server is running on port ${PORT}.`);
 });

@@ -1,9 +1,10 @@
+const { DB_NAME, DB_HOST, DB_PORT, DB_USER, DB_PASSWORD } = process.env;
 const mysqlConfig = {
-    database: "chat",
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "surf8106",
+    database: DB_NAME as string,
+    host: DB_HOST as string,
+    port: DB_PORT as string,
+    user: DB_USER as string,
+    password: DB_PASSWORD as string,
 };
 
 export default mysqlConfig;

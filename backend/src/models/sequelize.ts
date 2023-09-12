@@ -4,7 +4,7 @@ import mysqlConfig from "../config/db.mysql";
 const { database, host, port, user, password } = mysqlConfig;
 const sequelize = new Sequelize(database, user, password, {
     host: host,
-    port: port,
+    port: Number(port),
     dialect: "mysql",
 });
 
