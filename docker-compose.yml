@@ -15,7 +15,7 @@ services:
     networks:
       - backend
 
-  chat-app-backend:
+  backend:
     depends_on:
       - mysqldb
     build: ./backend
@@ -36,7 +36,7 @@ services:
 
   chat-app-frontend:
     depends_on:
-      - chat-app-backend
+      - backend
     build:
       context: ./frontend
       args:

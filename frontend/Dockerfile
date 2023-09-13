@@ -1,5 +1,5 @@
 # Stage 1
-FROM node:16.14.2
+FROM node:16.14.2 as build-stage
 
 WORKDIR /backend
 COPY package.json .
@@ -14,7 +14,7 @@ RUN npm run build
 # Stage 2
 FROM nginx:1.17.0-alpine
 
-COPY --from=build-stage /backend/build /usr/share/nginx/html
+COPY --from=build-stage /frontend/build /usr/share/nginx/html
 EXPOSE $REACT_DOCKER_PORT
 
 CMD nginx -g 'daemon off;'
